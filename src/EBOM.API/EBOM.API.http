@@ -1,0 +1,6 @@
+@EBOM.API_HostAddress = http://localhost:5034
+
+GET {{EBOM.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

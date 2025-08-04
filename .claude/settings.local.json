@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet new:*)",
+      "Bash(mkdir:*)",
+      "Bash(dotnet sln add:*)",
+      "Bash(dotnet add reference:*)",
+      "Bash(dotnet add package:*)",
+      "Bash(rm:*)",
+      "Bash(npx @angular/cli@17:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss:*)"
+    ],
+    "deny": []
+  }
+}
