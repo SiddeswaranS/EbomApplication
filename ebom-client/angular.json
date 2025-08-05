@@ -60,6 +60,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 6001
+          },
           "configurations": {
             "production": {
               "buildTarget": "ebom-client:build:production"

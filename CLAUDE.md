@@ -189,6 +189,14 @@ EBOM.Core (no dependencies on other projects)
 - **SQL Server**: Local or remote instance (SQL Server 2019 Express or higher)
 - **Visual Studio 2022** or **VS Code**: Recommended IDEs
 
+### Port Configuration
+The application is configured to run on the following ports:
+- **API (Backend)**: 
+  - HTTP: `http://localhost:5001`
+  - HTTPS: `https://localhost:5001`
+- **Angular UI (Frontend)**: `http://localhost:6001`
+- **CORS**: Configured to allow requests from both `http://localhost:4200` and `http://localhost:6001`
+
 ### Backend Setup
 
 1. **Clone Repository**
@@ -229,7 +237,7 @@ EBOM.Core (no dependencies on other projects)
    - Apply all EF Core migrations
    - Seed initial data (entity types, default users)
    
-   API will be available at `https://localhost:5001`
+   API will be available at `http://localhost:5001` (development) or `https://localhost:5001` (with HTTPS)
 
 ### Frontend Setup
 
@@ -439,7 +447,7 @@ var serverName = hostname switch
 ```typescript
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:5001'
+  apiUrl: 'http://localhost:5001'  // Use http for development
 };
 ```
 
