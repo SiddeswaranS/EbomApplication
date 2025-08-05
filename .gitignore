@@ -12,6 +12,8 @@ x86/
 bld/
 [Bb]in/
 [Oo]bj/
+**/[Bb]in/
+**/[Oo]bj/
 [Ll]og/
 [Ll]ogs/
 
@@ -455,6 +457,25 @@ env/
 
 # Entity Framework
 Migrations/
+
+# .NET Core build artifacts
+*.AssemblyInfo.cs
+*.AssemblyInfoInputs.cache
+*.GeneratedMSBuildEditorConfig.editorconfig
+*.GlobalUsings.g.cs
+*.assets.cache
+*.csproj.AssemblyReference.cache
+*.csproj.nuget.dgspec.json
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+project.assets.json
+project.nuget.cache
+
+# Ensure all obj and bin folders are ignored
+obj/
+bin/
+**/obj/
+**/bin/
 
 # Sensitive configuration
 appsettings.Development.json
