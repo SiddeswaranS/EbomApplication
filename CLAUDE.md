@@ -215,7 +215,7 @@ EBOM.Core (no dependencies on other projects)
    cd src/EBOM.API
    dotnet run
    ```
-   API will be available at `https://localhost:7001`
+   API will be available at `https://localhost:5001`
 
 ### Frontend Setup
 
@@ -233,7 +233,7 @@ EBOM.Core (no dependencies on other projects)
    ```bash
    npm start
    ```
-   Application will be available at `http://localhost:4200`
+   Application will be available at `http://localhost:6001`
 
 ### Build for Production
 
@@ -351,7 +351,7 @@ interface EntityState {
 ```typescript
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:7001'
+  apiUrl: 'https://localhost:5001'
 };
 ```
 

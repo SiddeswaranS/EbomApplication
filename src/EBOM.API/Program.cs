@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using EBOM.Data;
 using EBOM.Common.Models.Configuration;
+using EBOM.Common.Configuration;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,8 +25,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Configure Entity Framework
+var isDevelopment = builder.Environment.IsDevelopment();
+var connectionString = DatabaseConfiguration.GetConnectionString(isDevelopment);
 builder.Services.AddDbContext<EbomDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(connectionString));
 
 // Configure settings
 builder.Services.Configure<EbomSettings>(builder.Configuration.GetSection("EbomSettings"));
@@ -87,11 +90,15 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// Create database on startup if it doesn't exist
-using (var scope = app.Services.CreateScope())
+// Initialize database on startup
+try
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<EbomDbContext>();
-    dbContext.Database.EnsureCreated();
+    await DatabaseInitializer.InitializeAsync(app.Services, app.Environment);
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "An error occurred while initializing the database.");
+    throw;
 }
 
 app.Run();
