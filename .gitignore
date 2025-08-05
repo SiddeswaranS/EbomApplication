@@ -456,7 +456,7 @@ env/
 *.sln.docstates
 
 # Entity Framework
-Migrations/
+# Migrations/ - Commented out to track EF Core migrations
 
 # .NET Core build artifacts
 *.AssemblyInfo.cs

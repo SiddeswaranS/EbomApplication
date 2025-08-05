@@ -39,8 +39,8 @@ export const appConfig: ApplicationConfig = {
       JwtModule.forRoot({
         config: {
           tokenGetter: tokenGetter,
-          allowedDomains: ['localhost:7001', 'localhost:5000'],
-          disallowedRoutes: ['localhost:7001/api/auth', 'localhost:5000/api/auth']
+          allowedDomains: ['localhost:5001'],
+          disallowedRoutes: ['localhost:5001/api/auth/login', 'localhost:5001/api/auth/refresh']
         }
       })
     ),

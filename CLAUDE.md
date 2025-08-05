@@ -186,7 +186,7 @@ EBOM.Core (no dependencies on other projects)
 ### Prerequisites
 - **.NET 8 SDK**: Download from Microsoft
 - **Node.js 18+**: Required for Angular development
-- **SQL Server**: Local or remote instance
+- **SQL Server**: Local or remote instance (SQL Server 2019 Express or higher)
 - **Visual Studio 2022** or **VS Code**: Recommended IDEs
 
 ### Backend Setup
@@ -198,16 +198,23 @@ EBOM.Core (no dependencies on other projects)
    ```
 
 2. **Configure Database**
-   - Update connection string in `appsettings.json`
-   - Run Entity Framework migrations:
-   ```bash
-   cd src/EBOM.API
-   dotnet ef database update
-   ```
+   The application now includes an automatic database configuration and initialization system:
+   
+   - **Automatic Database Creation**: The application will automatically create the database if it doesn't exist
+   - **Dynamic Connection Strings**: Connection strings are determined based on the hostname
+   - **Environment-based Databases**: Uses `EBOM_Dev` for development and `EBOM_Prod` for production
+   - **Automatic Migrations**: Entity Framework migrations are applied automatically on startup
+   - **Data Seeding**: Initial data (entity types, default users) is seeded automatically
+
+   **Supported SQL Server Instances:**
+   - `HOCOM5792122\SQLEXPRESS2019` (hostname: HOCOM5792122)
+   - `DESKTOP-DG9LM6V\SW_MSSQLSERVER` (hostname: DESKTOP-DG9LM6V)
+   
+   **Note**: If running on a different machine, add your hostname configuration to `DatabaseConfiguration.cs`
 
 3. **Configure Settings**
    - Update `appsettings.json` with JWT settings
-   - Configure file upload paths and limits
+   - Configure file upload settings (max size, batch size, excluded columns)
    - Set logging configuration
 
 4. **Run Backend**
@@ -215,6 +222,13 @@ EBOM.Core (no dependencies on other projects)
    cd src/EBOM.API
    dotnet run
    ```
+   
+   On first run, the application will:
+   - Check for database existence
+   - Create database if needed (attempts Windows Auth first, then SQL Auth)
+   - Apply all EF Core migrations
+   - Seed initial data (entity types, default users)
+   
    API will be available at `https://localhost:5001`
 
 ### Frontend Setup
@@ -324,28 +338,102 @@ interface EntityState {
 - Configure file upload security (size limits, type validation)
 - Set up rate limiting and request validation
 
+## Database Configuration System
+
+### Automatic Database Initialization
+The application includes a sophisticated database initialization system that handles:
+
+1. **Environment Detection**: Automatically determines development vs production environment
+2. **Database Creation**: Creates databases with proper permissions if they don't exist
+3. **Migration Management**: Applies Entity Framework migrations automatically
+4. **Data Seeding**: Seeds initial reference data and default users
+
+### Connection String Management
+Connection strings are dynamically generated based on:
+- **Hostname Detection**: Automatically detects the machine and selects appropriate SQL Server instance
+- **Environment-based Naming**: Uses `EBOM_Dev` for development, `EBOM_Prod` for production
+- **Authentication**: Uses SQL authentication with FUJITECDEV user credentials
+
+### Database Seeding
+Initial data includes:
+- **Entity Data Types**: STRING, NUMBER, DATE, BOOLEAN, DECIMAL
+- **Default Users**: admin@ebom.com and user@ebom.com
+
+### Entity Framework Migrations
+The project uses EF Core migrations to manage database schema:
+
+1. **Initial Migration**: The `InitialCreate` migration contains the complete database schema
+2. **Automatic Application**: Migrations are applied automatically on startup via `DatabaseInitializer`
+3. **Migration Commands**:
+   ```bash
+   # Create a new migration
+   cd src/EBOM.Data
+   dotnet ef migrations add MigrationName --startup-project "..\EBOM.API"
+   
+   # Remove last migration
+   dotnet ef migrations remove --startup-project "..\EBOM.API"
+   
+   # Apply migrations manually
+   dotnet ef database update --startup-project "..\EBOM.API"
+   ```
+
+### Package Versions
+All EF Core related packages use version 8.0.8:
+- **EBOM.Data**: Microsoft.EntityFrameworkCore.SqlServer 8.0.8, Microsoft.EntityFrameworkCore.Tools 8.0.8
+- **EBOM.Common**: Microsoft.EntityFrameworkCore 8.0.8, Microsoft.Data.SqlClient 5.1.5
+- **EBOM.API**: Microsoft.EntityFrameworkCore.Design 8.0.8
+
+### Adding New Development Machines
+To add support for a new development machine, update `DatabaseConfiguration.cs`:
+```csharp
+var serverName = hostname switch
+{
+    "YOUR-HOSTNAME" => "YOUR-HOSTNAME\\SQLINSTANCE",
+    // ... existing entries
+};
+```
+
 ## Configuration Settings
 
 ### Backend Configuration (`appsettings.json`)
 ```json
 {
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=EBOM;Trusted_Connection=true;MultipleActiveResultSets=true"
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
   },
-  "JwtSettings": {
-    "Secret": "your-secret-key-here",
-    "Issuer": "EBOM.API",
-    "Audience": "EBOM.Client",
-    "ExpirationInMinutes": 60
-  },
+  "AllowedHosts": "*",
   "EbomSettings": {
     "SeparatorColumn": "Status",
-    "ExcludedColumns": ["Concat", "SerialNumber"],
+    "ExcludedColumns": [
+      "Concat",
+      "SerialNumber",
+      "InternalNotes",
+      "TempColumn"
+    ],
+    "SupportedFileExtensions": [".xlsx", ".xls"],
     "MaxFileSize": 52428800,
-    "BatchSize": 1000
+    "BatchSize": 1000,
+    "DataValidation": {
+      "MaxSampleRows": 100,
+      "RequiredSheets": {
+        "DataSheetPattern": "^Data\\d{2}of\\d{2}$",
+        "ConfigurationSheet": "Configuration"
+      }
+    }
+  },
+  "JwtSettings": {
+    "Secret": "your-256-bit-secret-key-here-replace-in-production",
+    "Issuer": "EBOM.API",
+    "Audience": "EBOM.Client",
+    "ExpirationMinutes": 60
   }
 }
 ```
+
+**Note**: Connection strings are no longer stored in appsettings.json. They are dynamically generated by the DatabaseConfiguration class.
 
 ### Frontend Configuration (`environment.ts`)
 ```typescript

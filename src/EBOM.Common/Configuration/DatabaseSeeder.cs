@@ -37,11 +37,11 @@ namespace EBOM.Common.Configuration
                 
             var dataTypes = new List<EntityDataType>
             {
-                new EntityDataType { DataTypeID = 1, DataTypeName = "STRING", Description = "Text data type" },
-                new EntityDataType { DataTypeID = 2, DataTypeName = "NUMBER", Description = "Numeric data type" },
-                new EntityDataType { DataTypeID = 3, DataTypeName = "DATE", Description = "Date data type" },
-                new EntityDataType { DataTypeID = 4, DataTypeName = "BOOLEAN", Description = "Boolean data type" },
-                new EntityDataType { DataTypeID = 5, DataTypeName = "DECIMAL", Description = "Decimal data type" }
+                new EntityDataType { DataTypeID = 1, DataTypeName = "STRING", DataTypeDescription = "Text data type" },
+                new EntityDataType { DataTypeID = 2, DataTypeName = "NUMBER", DataTypeDescription = "Numeric data type" },
+                new EntityDataType { DataTypeID = 3, DataTypeName = "DATE", DataTypeDescription = "Date data type" },
+                new EntityDataType { DataTypeID = 4, DataTypeName = "BOOLEAN", DataTypeDescription = "Boolean data type" },
+                new EntityDataType { DataTypeID = 5, DataTypeName = "DECIMAL", DataTypeDescription = "Decimal data type" }
             };
             
             await context.EntityDataTypes.AddRangeAsync(dataTypes);
@@ -60,20 +60,18 @@ namespace EBOM.Common.Configuration
                     UserID = 1,
                     UserName = "admin",
                     UserEmail = "admin@ebom.com",
-                    Password = "Admin@123", // In production, this should be hashed
                     IsActive = true,
-                    CreatedDate = DateTime.UtcNow,
-                    ModifiedDate = DateTime.UtcNow
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedBy = 1
                 },
                 new UserMaster
                 {
                     UserID = 2,
                     UserName = "user",
                     UserEmail = "user@ebom.com",
-                    Password = "User@123", // In production, this should be hashed
                     IsActive = true,
-                    CreatedDate = DateTime.UtcNow,
-                    ModifiedDate = DateTime.UtcNow
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedBy = 1
                 }
             };
             

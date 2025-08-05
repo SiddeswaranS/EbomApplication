@@ -17,7 +17,9 @@
       "Bash(dotnet build:*)",
       "Bash(npm run build:*)",
       "Bash(git add:*)",
-      "Bash(dotnet run:*)"
+      "Bash(dotnet run:*)",
+      "Bash(dotnet remove package:*)",
+      "Bash(dir:*)"
     ],
     "deny": []
   }

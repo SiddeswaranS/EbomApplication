@@ -123,8 +123,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(e: any): void {
-    e.preventDefault();
+  login(e?: any): void {
+    // DevExtreme button onClick doesn't need preventDefault
     
     if (!this.loginForm.email || !this.loginForm.password) {
       this.notify.error('Please fill in all fields');
