@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EBOM.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b03d3c0f03e0d6406a004e679d9f515e3a042b26")]
 [assembly: System.Reflection.AssemblyProductAttribute("EBOM.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EBOM.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

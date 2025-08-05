@@ -347,6 +347,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "C:\\Users\\SiddeswaranS\\Desktop\\EbomApplication\\src\\EBOM.Common\\EBOM.Common.csproj": {
+                "projectPath": "C:\\Users\\SiddeswaranS\\Desktop\\EbomApplication\\src\\EBOM.Common\\EBOM.Common.csproj"
+              },
               "C:\\Users\\SiddeswaranS\\Desktop\\EbomApplication\\src\\EBOM.Core\\EBOM.Core.csproj": {
                 "projectPath": "C:\\Users\\SiddeswaranS\\Desktop\\EbomApplication\\src\\EBOM.Core\\EBOM.Core.csproj"
               },

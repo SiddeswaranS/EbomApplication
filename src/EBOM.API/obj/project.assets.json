@@ -1522,6 +1522,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "EBOM.Common": "1.0.0",
           "EBOM.Core": "1.0.0",
           "EBOM.Data": "1.0.0",
           "EPPlus": "7.0.0",

@@ -9,7 +9,11 @@
       "Bash(rm:*)",
       "Bash(npx @angular/cli@17:*)",
       "Bash(npm install:*)",
-      "Bash(npx tailwindcss:*)"
+      "Bash(npx tailwindcss:*)",
+      "Bash(dotnet ef migrations add:*)",
+      "Bash(dotnet build)",
+      "Bash(find:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
   }

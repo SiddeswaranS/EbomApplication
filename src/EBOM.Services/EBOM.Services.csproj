@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EBOM.Core\EBOM.Core.csproj" />
     <ProjectReference Include="..\EBOM.Data\EBOM.Data.csproj" />
+    <ProjectReference Include="..\EBOM.Common\EBOM.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
