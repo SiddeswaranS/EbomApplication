@@ -32,14 +32,9 @@ interface KpiData {
                 </span>
               </div>
             </div>
-            <dx-circular-gauge
-              [value]="kpi.percentage"
-              [startValue]="0"
-              [endValue]="100"
-              [elementAttr]="{ class: 'gauge-small' }">
-              <dxo-size [width]="80" [height]="80"></dxo-size>
-              <dxi-range [startValue]="0" [endValue]="100" [color]="'#2196f3'"></dxi-range>
-            </dx-circular-gauge>
+            <div class="w-16 h-16 rounded-full border-4 border-blue-500 flex items-center justify-center bg-blue-50">
+              <span class="text-xs font-semibold text-blue-700">{{ kpi.percentage }}%</span>
+            </div>
           </div>
         </div>
       </div>
@@ -99,8 +94,7 @@ interface KpiData {
             </dxi-series>
             <dxo-legend 
               [visible]="true"
-              horizontalAlignment="right"
-              verticalAlignment="middle">
+              horizontalAlignment="right">
             </dxo-legend>
             <dxo-tooltip [enabled]="true"></dxo-tooltip>
           </dx-pie-chart>

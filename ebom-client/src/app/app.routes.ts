@@ -29,7 +29,11 @@ export const routes: Routes = [
       },
       {
         path: 'data/upload',
-        loadComponent: () => import('./features/data-upload/upload-wizard/upload-wizard.component').then(m => m.UploadWizardComponent)
+        loadComponent: () => import('./features/data/data-upload-wizard/data-upload-wizard.component').then(m => m.DataUploadWizardComponent)
+      },
+      {
+        path: 'data/upload/:entityId',
+        loadComponent: () => import('./features/data/data-upload-wizard/data-upload-wizard.component').then(m => m.DataUploadWizardComponent)
       },
       {
         path: 'reports',

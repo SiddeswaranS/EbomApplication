@@ -1,49 +1,130 @@
-# EBOM (Engineering Bill of Materials) Project
+# EBOM (Engineering Bill of Materials) System
 
 ## Project Overview
-EBOM.Shared is a .NET class library designed for automated part number selection in elevator manufacturing based on configuration rules and dependencies.
+The EBOM System is a comprehensive full-stack application for managing Engineering Bill of Materials in elevator manufacturing. It provides template-based data management, dynamic table creation, file processing, and advanced reporting capabilities.
+
+## Architecture Overview
+This is a **full-stack application** with:
+- **Backend**: .NET 8 Web API with Clean Architecture
+- **Frontend**: Angular 17 with standalone components and NgRx state management
+- **Database**: SQL Server with Entity Framework Core 8
+- **File Processing**: Excel template and data processing with EPPlus
 
 ## Solution Structure
 ```
 EBOM.Solution/
 ├── src/
-│   ├── EBOM.Core/                 # Core entities, interfaces, enums
-│   ├── EBOM.Data/                 # Data access layer, EF Core, repositories
-│   ├── EBOM.Services/             # Business logic services
-│   ├── EBOM.Common/               # Shared utilities, helpers, extensions
-│   └── EBOM.API/                  # Optional REST API project
+│   ├── EBOM.Core/                 # Domain entities, interfaces, models
+│   ├── EBOM.Data/                 # Data access layer, EF Core, configurations
+│   ├── EBOM.Services/             # Business logic services and implementations
+│   ├── EBOM.Common/               # Shared utilities, DTOs, configuration models
+│   └── EBOM.API/                  # REST API controllers and middleware
+├── ebom-client/                   # Angular 17 frontend application
+│   ├── src/app/
+│   │   ├── core/                  # Core services (auth, notifications)
+│   │   ├── features/              # Feature modules (dashboard, entities, etc.)
+│   │   ├── layouts/               # Layout components
+│   │   ├── shared/                # Shared components, pipes, directives
+│   │   └── store/                 # NgRx state management
 ├── tests/
-│   ├── EBOM.Core.Tests/           # Unit tests for core
-│   ├── EBOM.Services.Tests/       # Unit tests for services
+│   ├── EBOM.Core.Tests/           # Unit tests for core domain
+│   ├── EBOM.Services.Tests/       # Unit tests for business logic
 │   └── EBOM.Integration.Tests/    # Integration tests
-├── docs/                          # Documentation
-└── scripts/                       # Database scripts, deployment scripts
+└── docs/                          # Documentation
 ```
 
 ## Key Technologies
-- **.NET 8**: Target framework
-- **Entity Framework Core 8**: ORM for database access
-- **SQL Server**: Database
-- **EPPlus**: Excel file processing
+
+### Backend Stack
+- **.NET 8**: Target framework with C# 12 features
+- **Entity Framework Core 8**: ORM for database access with migrations
+- **SQL Server**: Primary database with dynamic table creation
+- **EPPlus**: Excel template and data file processing
+- **FluentValidation**: Input validation and business rules
 - **Serilog**: Structured logging
-- **xUnit**: Testing framework
-- **FluentValidation**: Input validation
+- **JWT Bearer**: Authentication and authorization
+- **AutoMapper**: Object-to-object mapping
+
+### Frontend Stack
+- **Angular 17**: Modern web framework with standalone components
+- **TypeScript**: Type-safe JavaScript development
+- **NgRx**: State management with actions, reducers, effects
+- **DevExtreme**: Enterprise UI component library
+- **Tailwind CSS**: Utility-first CSS framework
+- **RxJS**: Reactive programming for async operations
+
+### Development Tools
+- **xUnit**: Testing framework for .NET
+- **Jasmine/Karma**: Testing for Angular
+- **Git**: Version control
+- **npm**: Package management for frontend
+
+## Core Features
+
+### 1. Template Management
+- **Excel Template Upload**: Upload and process Excel templates with column classification
+- **Template Validation**: Automatic validation of template structure and data types
+- **Revision Control**: Track template versions with automatic revision numbering
+- **Column Classification**: Distinguish between ValueType and DependencyType columns
+- **Mirror Entity Support**: Handle relationships between entities through templates
+
+### 2. Data Management
+- **Data File Processing**: Upload Excel data files with validation against templates
+- **Dynamic Table Creation**: Automatically create SQL tables based on template structures
+- **Data Validation**: Real-time validation of data against template definitions
+- **Bulk Data Import**: Efficient processing of large data sets with progress tracking
+- **Data Revision Control**: Track all data uploads with versioning
+
+### 3. Entity Management
+- **Entity CRUD Operations**: Complete create, read, update, delete operations
+- **Master-Detail Views**: Comprehensive entity detail pages with related data
+- **Entity Types**: Support for ISR, PSR, CSR, and CMN entity classifications
+- **Entity Dependencies**: Manage relationships and dependencies between entities
+- **Search and Filtering**: Advanced filtering by entity type and search terms
+
+### 4. Dashboard and Analytics
+- **Real-time Dashboard**: KPIs, metrics, and system health monitoring
+- **Interactive Charts**: Data visualization with DevExtreme chart components
+- **System Metrics**: Track entities, templates, data uploads, and system usage
+- **Upload Activity Tracking**: Monitor file upload trends and patterns
+
+### 5. Reports and Analytics
+- **System Overview**: Comprehensive system metrics and health indicators
+- **Entity Reports**: Detailed reporting on entity data and template usage
+- **Data Quality Monitoring**: Track data validation issues and quality metrics
+- **Export Capabilities**: Export reports to various formats (Excel, PDF)
+
+### 6. Authentication and Security
+- **JWT Authentication**: Secure token-based authentication system
+- **Role-based Access**: Authorization guards and route protection
+- **Session Management**: Automatic token refresh and session handling
+- **API Security**: Protected endpoints with authentication middleware
 
 ## Development Guidelines
 
 ### 1. Architecture Principles
-- **Clean Architecture**: Separate concerns into layers
-- **SOLID Principles**: Single responsibility, dependency injection
-- **Domain-Driven Design**: Rich domain models
-- **Repository Pattern**: Abstract data access
-- **Unit of Work**: Transaction management
+- **Clean Architecture**: Separate concerns into distinct layers (Core, Data, Services, API)
+- **SOLID Principles**: Single responsibility, dependency injection, interface segregation
+- **Domain-Driven Design**: Rich domain models with business logic encapsulation
+- **Repository Pattern**: Abstract data access with Entity Framework Core
+- **CQRS Pattern**: Separate read and write operations where appropriate
 
-### 2. Coding Standards
+### 2. Backend Coding Standards
 - Use C# 12 features where appropriate
-- Follow .NET naming conventions
+- Follow .NET naming conventions (PascalCase for public members)
 - Async/await for all I/O operations
 - Comprehensive XML documentation
 - No hardcoded strings (use constants/resources)
+- Dependency injection for all services
+- Use nullable reference types
+
+### 3. Frontend Coding Standards
+- Follow Angular style guide conventions
+- Use TypeScript strict mode
+- Standalone components with signal-based change detection
+- RxJS for reactive programming patterns
+- Consistent naming: kebab-case for files, camelCase for properties
+- Use OnPush change detection strategy where possible
 
 ### 3. Project Dependencies
 ```

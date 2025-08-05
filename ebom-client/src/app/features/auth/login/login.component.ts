@@ -83,7 +83,7 @@ import { LoginRequest } from '../../../core/auth/models/auth.models';
             </div>
 
             <div class="mt-6 text-center text-sm text-gray-600">
-              <p>Email: admin@ebom.com</p>
+              <p>Email: admin&#64;ebom.com</p>
               <p>Password: admin123</p>
             </div>
           </div>

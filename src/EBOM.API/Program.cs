@@ -34,6 +34,8 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSet
 // Register services
 builder.Services.AddScoped<EBOM.Core.Interfaces.IValidationService, EBOM.Services.Implementations.ValidationService>();
 builder.Services.AddScoped<EBOM.Core.Interfaces.ITemplateProcessor, EBOM.Services.Implementations.TemplateProcessingService>();
+builder.Services.AddScoped<EBOM.Core.Interfaces.IDynamicTableManager, EBOM.Services.Implementations.DynamicTableManager>();
+builder.Services.AddScoped<EBOM.Core.Interfaces.IDataProcessor, EBOM.Services.Implementations.DataProcessor>();
 
 // Configure JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();

@@ -249,7 +249,7 @@ export class TemplateUploadComponent implements OnInit {
   onFileSelected(e: any): void {
     if (e.value && e.value.length > 0) {
       this.selectedFile = e.value[0];
-      this.parseFileName(this.selectedFile.name);
+      this.parseFileName(this.selectedFile!.name);
       this.uploadStarted = false;
       this.uploadResult = null;
       this.processingStatus = null;

@@ -247,9 +247,9 @@ interface EntityValue {
 })
 export class EntityDetailComponent implements OnInit {
   entity$: Observable<Entity>;
-  templateRevisions$: Observable<TemplateRevision[]>;
-  entityValues$: Observable<EntityValue[]>;
-  dataRevisions$: Observable<any[]>;
+  templateRevisions$: Observable<TemplateRevision[]> = new Observable();
+  entityValues$: Observable<EntityValue[]> = new Observable();
+  dataRevisions$: Observable<any[]> = new Observable();
   allEntities$: Observable<Entity[]>;
   
   isEditMode = false;

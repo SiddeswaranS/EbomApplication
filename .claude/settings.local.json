@@ -13,7 +13,9 @@
       "Bash(dotnet ef migrations add:*)",
       "Bash(dotnet build)",
       "Bash(find:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(dotnet build:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": []
   }
